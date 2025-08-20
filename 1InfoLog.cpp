@@ -1,41 +1,48 @@
-// Daily Programmer Challenge #1
-// JackInDaBean
+///////////////////////////////////////////////////////////////
+///      Daily Programmer Challenge #1  JackInDaBean        ///
+/////////////////////////////////////////////////////////////// 
 
+// Included Headers
 #include <iostream>
-#include <string>
 #include <fstream>
+#include <string>
 
-using namespace std;
+int main()
+{
 
-int main()  {
-    
-    // Variable declaration
+	// Local Variable Declaration
+	std::ofstream outfile;
+	std::string FirstName, Surname, Age, Username;
 
-    ofstream outfile; 
-    string PersonalFirstName, PersonalSecondName, Age, Username;
+	outfile.open("info-log.txt"); // Opens the txt file
 
-    outfile.open("info-log.txt"); // Open txt file
+	if (outfile.is_open()) // Checks if the file is open
+	{
+		std::cout << "Please enter your first name: ";
+		std::cin >> FirstName;
+		outfile << FirstName << " ";
 
-    if (outfile.is_open())  { // Check if the file is open
-        cout << "Please enter your first name: ";
-        cin >> PersonalFirstName;
-        outfile << PersonalFirstName << " ";
-        cout << "\nPlease enter your second name: ";
-        cin >> PersonalSecondName;
-        outfile << PersonalSecondName << endl;
-        cout << "\nPlease enter your age: ";
-        cin >> Age;
-        outfile << Age << endl;
-        cout << "\nPlease enter your Reddit username: ";
-        cin >> Username;
-        outfile << Username << endl;
-        cout << "\nYour full name is: " << PersonalFirstName << " " << PersonalSecondName << "." << "\nYou are " << Age << " years old.\nYour Reddit username is: " << Username;
+		std::cout << "\nPlease enter your surname: ";
+		std::cin >> Surname;
+		outfile << Surname << std::endl;
 
-        outfile.close();
-    
-    return 0;
-    } else {
-        cout << "\nERROR: File not found.";
-    }  
+		std::cout << "\nPlease enter your age: ";
+		std::cin >> Age;
+		outfile << Age << std::endl;
+
+		std::cout << "\nPlease enter your Reddit username: ";
+		std::cin >> Username;
+		outfile << Username << std::endl;
+
+		std::cout << "\nYour full name is: " << FirstName << " " << Surname << "." << "\nYou are " << Age << " years old.";
+		std::cout << "\nYour Reddit username is: " << Username << ".";
+
+		outfile.close(); // Closes the file
+
+		return 0;
+
+	} else {
+		std::cout << "ERROR: File not found.";
+	}
+
 }
-
