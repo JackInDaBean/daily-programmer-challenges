@@ -12,7 +12,6 @@
 // Function Headers
 void welcomeMessage();
 void balanceCheck(std::string stringInBalanceCheck);
-void inputValidation(std::string stringInputValidation);
 
 // Main
 
@@ -26,6 +25,15 @@ int main()
 
 		welcomeMessage();
 		std::cin >> userInputtedString;
+		for (char i : userInputtedString)
+		{
+			if ((i != 120) || (i != 121))
+			{
+				std::cout << "\n\nERROR: STRING MUST BE EITHER x OR y - TRY AGAIN: ";
+				std::cin >> userInputtedString;
+			}
+		}
+
 		balanceCheck(userInputtedString);
 	}
 }
@@ -44,7 +52,7 @@ void welcomeMessage()
 
 void balanceCheck(std::string stringInBalanceCheck)
 {
-	int countForX = 0, countForY = 0;
+	int countForX = 0, countForY = 0, resultOfCheck;
 
 	for (char i : stringInBalanceCheck)
 	{
@@ -58,15 +66,32 @@ void balanceCheck(std::string stringInBalanceCheck)
 		}
 	}
 
-	if (countForX != countForY)
+	// Arithmetic for Switch statement, seemed confusing so explanation needed.
+	if ((countForX == 0) && (countForY > 0)) // X and Y are not equal & X = 0 - Balanced.
 	{
-		std::cout << "\n\nThe string: " << stringInBalanceCheck << " is unbalanced\n\n";
-	} else {
-		std::cout << "\n\nThe string: " << stringInBalanceCheck << " is balanced!\n\n";
+		resultOfCheck = 1;
 	}
-}
+	else if ((countForY == 0) && (countForX > 0)) // X and Y are not equal & Y = 0 - Balanced.
+	{
+		resultOfCheck = 1;
+	}
+	else if (countForX == countForY) // X and Y are equal = 1 - Balanced.
+	{
+		resultOfCheck = 1;
+	}
+	else if (countForX != countForY) // X and Y are not equal = 0 - Unbalanced.
+	{
+		resultOfCheck = 0;
+	}
 
-void inputValidation(std::string stringInputValidation)
-{
 
+	switch (resultOfCheck)
+	{
+	case 0:
+		std::cout << "\n\nThe string: " << stringInBalanceCheck << " is unbalanced\n\n";
+		break;
+	case 1:
+		std::cout << "\n\nThe string: " << stringInBalanceCheck << " is balanced!\n\n";
+		break;
+	}
 }
